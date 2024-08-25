@@ -1,0 +1,335 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Raleway", sans-serif;
+        background-color: #ebe1e8;
+      }
+      .main_container {
+        position: relative;
+      }
+      /* *********** */
+      /* **navbar** */
+      /* *********** */
+      nav {
+        background-color: #8a4d76;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+        font-family: "Raleway", sans-serif;
+      }
+      nav:hover {
+        background-color: #6a1a9e; /* Darker violet color on hover */
+      }
+      nav a#logo-link {
+        float: left;
+        margin-right: 2rem;
+      }
+      
+      nav ul {
+        float: right;
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      nav li {
+        margin-right: 2rem;
+      }
+      nav li a {
+        text-decoration: none;
+        font-size: 1rem;
+      }
+      
+      nav a,
+      nav button {
+        color: #e3e1f0;
+        background-color: transparent;
+        border: none;
+      
+        cursor: pointer;
+        font-size: 1rem;
+        transition: color 0.2s ease-in-out;
+      }
+      
+      nav a:hover,
+      nav button:hover {
+        color: #e3e1f0;
+      }
+      
+      nav input[type="search"] {
+        background-color: #e3e1f0;
+        border-radius: 3px;
+        border: none;
+        color: black;
+        padding: 0.2rem;
+        width: 15rem;
+      }
+      
+      nav form {
+        display: flex;
+        align-items: center;
+      }
+      
+      nav form button {
+        background-color: #444;
+        border-radius: 3px;
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        margin-left: 1rem;
+      }
+      .search-btn {
+        height: 2.4rem;
+        border-radius: 6px;
+        border-color: white;
+      }
+      h1 {
+        text-align: center;
+        color: #8a4d76; /* Deep Purple */
+      }
+      /* *********** */
+      /* **question** */
+      /* *********** */
+      .question {
+        margin-top: 100px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 3px 10px rgba(255, 107, 107, 0.368); /* Add shadow effect */
+        transition: transform 0.3s ease; /* Add transition effect */
+      }
+      
+      .question:hover {
+        transform: translateY(-5px); /* Add hover effect */
+      }
+      
+      .question h5 {
+        margin-top: 0;
+        color: #8a4d76;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      
+      .question p {
+        margin-bottom: 15px;
+        color: #007d8c;
+      }
+      
+      .question a {
+        display: inline-block;
+        background-color: #ff6b6b;
+        color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .question a:hover {
+        background-color: #ff4757;
+      }
+      .container {
+        max-width: 900px;
+        margin: 100px auto;
+      }
+      /* .container {
+        position: relative;
+      } */
+      
+      #new-question-form {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      #new-question-form input[type="text"],
+      #new-question-form button {
+        width: 500px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      #new-question-form button {
+        background-color: #ff6b6b;
+        color: #fff;
+        padding: 7px 13px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        border: none;
+        font-size: 1rem;
+        max-width: 100px;
+      }
+      
+      #new-question-form button:hover {
+        background-color: #f55858;
+      }
+
+      .answer {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 3px 10px rgba(255, 107, 107, 0.368); /* Add shadow effect */
+        transition: transform 0.3s ease; /* Add transition effect */
+   
+        
+
+      }
+
+      .answer p {
+        margin-bottom: 15px;
+        color: #007d8c;
+      }
+      
+      .answer a {
+        display: inline-block;
+        background-color: #ff6b6b;
+        color: #fff;
+        padding: 5px 10px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .answer-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .delete-btn{
+        font-size: 400px;
+      }
+      .btn-Remove{
+    
+        /* background-color: #ff6b6b; */
+        color: #ff6b6b;
+        padding: px 13px;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        border: none;
+        font-size: 12px;
+        max-width: 100px;
+        font-weight: 700;
+      }
+    
+      .user-info {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 30px;
+  height: 30px; 
+  border-radius: 50%; 
+  margin-right: 10px; 
+}
+.username {
+  font-weight: bold;
+}
+
+.logo-image {
+        width: 45%;
+        height: auto; /* Maintain aspect ratio */
+        display: inline-block;
+        margin: -16% 0 0 0; /* Move the image upwards to center vertically */
+      }
+
+
+
+    </style>
+
+    
+    <title>Questions</title>
+  </head>
+  <body>
+    <div class="main_container">
+      <nav>
+        <a href="{%url 'home'%}" id="logo-link">
+          <div style="height: 55px; overflow: hidden;">
+            <img class="logo-image" src="{% static 'logo.png' %}" alt="Logo" />
+          </div>
+        </a>
+        <ul class="flex justify-center">
+          <li><a href="{% url 'home' %}" id="logout-btn">Home</a></li>
+      
+          <li><a href="{% url 'articles' %}" id="logout-btn">Article</a></li>
+          <li><a href="{% url 'profile' %}" id="logout-btn">profile</a></li>
+          <li><a href="{% url 'logout' %}" id="logout-btn">Logout</a></li>
+          <li><a href="{% url 'chat' %}" id="chatbot-link">Chatbot</a></li>
+        </ul>
+      </nav>
+      <div class="container">
+
+        
+
+
+        <div class="question">
+          <div class="user-info">
+            <img src="{% static 'profile/' %}{{question.0.image}}" alt="Profile Image" class="profile-image">
+            <div class="username">{{question.0.name | title}}</div>
+          </div>
+          <h5>{{question.0.question}}</h5>
+          <p>{{question.0.description}}</p>
+          {% if login_id == question.0.login_id %}
+
+          <form action="{% url 'remove_question' %}" method="post">
+            {%csrf_token%}
+            <button class="btn-Remove" type="submit">Remove</button>
+            <input type="hidden" value="{{question.0.id}}" name="q_remove">
+            
+          </form>
+          {% endif %}
+        </div>
+
+        {%for row in discussions %}
+        <div class="answer">
+          <div class="user-info">
+            <img src="{% static 'profile/' %}{{row.image}}" alt="Profile Image" class="profile-image">
+            <div class="username">{{row.name | title}}</div>
+          </div>
+          <div class="answer-container">
+           
+            <div><p>{{row.answer}}</p></div>
+          <!-- <div class="delete-btn"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+          </svg>
+          
+          </div> -->
+          {% if login_id == row.login_id %}
+          <form action="{% url 'remove_discussion' %}" method="post">
+            {%csrf_token%}
+            <button class="btn-Remove" type="submit">Remove</button>
+            <input type="hidden" value="{{row.id}}" name="remove">
+            
+          </form>
+          {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+
+        <!--  input field -->
+        <form action='{% url "add_discussion" %}' id="new-question-form" method='post' >
+          {%csrf_token%}
+          <input type="text" placeholder="Add your Thoughts..." name='add_discussion'/>
+          <input type='hidden' value='{{question.0.id}}' name='question_id'>
+          <button type="submit" class="submit-btn mt-4">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
